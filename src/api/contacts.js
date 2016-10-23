@@ -11,24 +11,61 @@ module.exports = {
 	showAll: showAllContacts
 };
 
-//POST /contacts
+//POST /api/contacts
 function createContact(req, res, next) {
-	res.send("Create new contact");
+  let created = req.body;
+
+  contactModel.createContact(created)
+    .then((result) => {
+      res.json({
+        status: 'success',
+        data: result
+      })
+    })
+    .catch(next);
 } 
 
-//PUT /contacts/:id
+//PUT /api/contacts/:id
 function updateContact(req, res, next) {
-	res.send("Update existing contact");
-} 
+	let contactId = req.params.id;
+  let updates = req.body;
 
-//DELETE /contacts/:id
+  contactModel.updateContact(contactId, updates)
+    .then((updated) => {
+      res.json({
+        status: 'success',
+        updated: updated
+      })
+    })
+    .catch(next);
+}
+
+//DELETE /api/contacts/:id
 function deleteContact(req, res, next) {
-	res.send("Delete contact");
+  let contactId = req.params.id;
+  
+  contactModel.deleteContact(contactId)
+    .then((deleted) => {
+      res.json({
+        status: 'success',
+        deleted: deleted
+      })
+    })
+    .catch(next);
 } 
 
 //GET /api/contacts/:id
 function showContact(req, res, next) {
-	res.send("Show contact");
+  let contactId = req.params.id;
+
+  contactModel.showContact(contactId)
+    .then((result) => {
+      res.json({
+        status: 'success',
+        data: result
+      })
+    })
+    .catch(next);
 }
 
 //GET /api/contacts
