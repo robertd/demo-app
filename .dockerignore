@@ -1,0 +1,11 @@
+.git
+.gitignore
+.dockerignore
+
+*.template
+*.yml
+
+npm-debug.log
+Dockerfile
+
+test/
