@@ -1,0 +1,25 @@
+{
+  "name": "demo",
+  "description": "Demo app",
+  "main": "index.js",
+  "authors": [
+    "RD"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "demo"
+  ],
+  "homepage": "https://github.com/robertd/demo-app",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "nvd3": "^1.8.4",
+    "aja": "^0.4.1"
+  }
+}

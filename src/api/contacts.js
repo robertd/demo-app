@@ -1,7 +1,7 @@
 'use strict';
 
-var Promise = require('bluebird');
-var contactModel = require('../models/contact');
+const Promise = require('bluebird');
+const contactModel = require('../models/contact');
 
 module.exports = {
 	create: createContact,

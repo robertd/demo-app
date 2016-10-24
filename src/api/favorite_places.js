@@ -1,7 +1,7 @@
 'use strict';
 
-var Promise = require('bluebird');
-var favoritePlaceModel = require('../models/favorite_place');
+const Promise = require('bluebird');
+const favoritePlaceModel = require('../models/favorite_place');
 
 module.exports = {
 	create: createFavoritePlace,
