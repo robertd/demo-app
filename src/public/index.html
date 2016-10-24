@@ -1,9 +1,95 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" ng-app="AdminDashboard">
 <head>
-  <title></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="IE=edge">
+  <title>TNMCorps Admin Dashboard</title>
+
+  <link rel="stylesheet" type="text/css" href="./vendor/bootstrap/dist/css/bootstrap.min.css")">
+  <link rel="stylesheet" type="text/css" href="./vendor/font-awesome/css/font-awesome.min.css")">
+  <link rel="stylesheet" type="text/css" href="./css/dashboard.css")">
+
+  <script type="text/javascript" src="./vendor/jquery/dist/jquery.min.js")"></script>
+  <script type="text/javascript" src="./vendor/moment/min/moment.min.js")"></script>
+  <script type="text/javascript" src="./vendor/angular/angular.js")"></script>
+  <script type="text/javascript" src="./vendor/angular-cookies/angular-cookies.min.js")"></script>
+  <script type="text/javascript" src="./vendor/angular-resource/angular-resource.min.js")"></script>
+  <script type="text/javascript" src="./vendor/angular-bootstrap/ui-bootstrap.min.js")"></script>
+  <script type="text/javascript" src="./vendor/angular-bootstrap/ui-bootstrap-tpls.min.js")"></script>
+  <script type="text/javascript" src="./vendor/angular-ui-router/release/angular-ui-router.min.js")"></script>
+
+  <script type="text/javascript" src="./app/app.js")"></script>
+  <script type="text/javascript" src="./app/services/UserService.js")"></script>
+  <script type="text/javascript" src="./app/services/AdminDashboardService.js")"></script>
+  <script type="text/javascript" src="./app/controllers/AdminDashboardCtrl.js")"></script>
+  <script type="text/javascript" src="./app/controllers/users/UserCreateCtrl.js")"></script>
+  <script type="text/javascript" src="./app/controllers/users/UserEditCtrl.js")"></script>
+  <script type="text/javascript" src="./app/controllers/users/UserShowCtrl.js")"></script>
+  <script type="text/javascript" src="./app/controllers/users/EnabledUsersWidgetCtrl.js")"></script>
+  <script type="text/javascript" src="./app/directives/loading.js")"></script>
+  <script type="text/javascript" src="./app/directives/ng-really.js")"></script>
+
 </head>
-<body>
+<body ng-controller="AdminDashboardCtrl">
+  <div id="page-wrapper" ng-class="{'active': toggle}" ng-cloak>
+
+    <!-- Sidebar -->
+
+    <div id="sidebar-wrapper">
+      <ul class="sidebar">
+        <li class="sidebar-main">
+          <a href="" ng-click="toggleSidebar()" title="Menu">Menu <span class="menu-icon glyphicon glyphicon-transfer"></span></a>
+        </li>
+
+        <li class="sidebar-title"><span>Navigation</span></li>
+        <li class="sidebar-list">
+          <a href="#/index" title="AdminDashboard">Admin Dashboard <span class="menu-icon fa fa-tachometer"></span></a>
+        </li>
+
+        <li class="sidebar-list">
+          <a href="/reports/states.html" title="States Reports">States Reports <span class="menu-icon fa fa-pie-chart"></span></a>
+        </li>
+
+        <li class="sidebar-list">
+          <a href="/reports/chart.html" title="Chart Reports">Charts Reports <span class="menu-icon fa fa-bar-chart-o"></span></a>
+        </li>
+
+        <li class="sidebar-title separator"><span>Return to App</span></li>
+        <li class="sidebar-list">
+          <a href="@Url.Content("~/")" title="Back to Map">Back to Map <span class="menu-icon fa fa-chevron-left"></span></a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- End Sidebar -->
+
+    <div id="content-wrapper">
+      <div class="page-content">
+
+        <!-- Header Bar -->
+
+        <div class="row header">
+          <div class="col-xs-12">
+            <div class="user pull-right">
+              <div class="item username">
+              Admin User
+              </div>
+            </div>
+            <div class="meta">
+              <div class="page">
+                TNMCorps Admin Dashboard
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- End Header Bar -->
+        <!-- Main Content -->
+        <section data-ui-view></section>
+      </div><!-- End Page Content -->
+    </div><!-- End Content Wrapper -->
+  </div><!-- End Page Wrapper -->
 
 </body>
 </html>

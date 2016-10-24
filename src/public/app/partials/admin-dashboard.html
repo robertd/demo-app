@@ -1,0 +1,39 @@
+﻿<div class="row">
+  <div class="col-lg-12">
+    <div class="widget" ng-controller="EnabledUsersWidgetCtrl as users">
+      <div class="widget-header">
+        <i class="fa fa-users"></i> Enabled Users
+        <input type="text" placeholder="Search" class="form-control input-sm pull-right" ng-model="searchTerm" />
+        <a href="#/users/new" class="btn btn-sm btn-success pull-right create-new-user">Create New User</a>
+        <div class="clearfix"></div>
+      </div>
+      <div class="widget-body large no-padding">
+        <rd-loading ng-hide="users"></rd-loading>
+        <div class="table-responsive" ng-show="users">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th class="text-center">ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Created At</th>
+                <th>Edit</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="user in users | filter:searchTerm">
+                <td class="text-center">{{ user.id }}</td>
+                <td><a href="#/users/{{user.id}}/show">{{ user.first_name + ' ' + user.last_name }}</a></td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.phone }}</td>
+                <td>{{ user.created_at | date : 'short'}}</td>
+                <td><a href="#/users/{{user.id}}/edit"><i class="fa fa-edit fa-lg"></i></a></td>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Main Content -->

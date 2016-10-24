@@ -1,0 +1,106 @@
+﻿<div class="row" ng-controller="UserReportCtrl as edits">
+  <div class="col-lg-12">
+    <div class="widget">
+      <div class="widget-header">
+        <i class="fa fa-users"></i> Categorized Edits for <b>{{displayName }}</b> ({{email}}) 
+        <select ng-model="resolutionType" ng-change="typeChange()">
+          <option value="approved" selected>Accepted</option>
+          <option value="rejected">Rejected</option>
+          <option value="pending">Pending</option>
+          <option value="all">All</option>
+        </select>
+        <input date-range-picker placeholder="Date Range" class="form-control date-picker input pull-right" type="text" ng-model="date" options="{ format: 'MM/DD/YYYY' }" ng-change="update()" />
+        <div class="clearfix"></div>
+      </div>
+
+      <rd-loading ng-hide="categorizedEdits"></rd-loading>
+      <div class="widget-body row" ng-show="categorizedEdits">
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+          <div class="widget-icon green pull-left">
+            <i class="fa fa-check"></i>
+          </div>
+          <div class="widget-content pull-left">
+            <div class="title" ng-model="categorizedEdits.Update">{{ categorizedEdits.Update }}</div>
+            <div class="comment">Updated</div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+          <div class="widget-icon black pull-left">
+            <i class="fa fa-map-marker"></i>
+          </div>
+          <div class="widget-content pull-left">
+            <div class="title" ng-model="categorizedEdits.Create">{{ categorizedEdits.Create }}</div>
+            <div class="comment">Created</div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+          <div class="widget-icon red pull-left">
+            <i class="fa fa-trash-o"></i>
+          </div>
+          <div class="widget-content pull-left">
+            <div class="title" ng-model="categorizedEdits.Delete">{{ categorizedEdits.Delete }}</div>
+            <div class="comment">Deleted</div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+          <div class="widget-icon orange pull-left">
+            <i class="fa fa-question"></i>
+          </div>
+          <div class="widget-content pull-left">
+            <div class="title" ng-model="categorizedEdits.Unknown">{{ categorizedEdits.Unknown }}</div>
+            <div class="comment">Unknown</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-12">
+    <div class="widget">
+      <div class="widget-header">
+        <i class="fa fa-users"></i> User Edits for <b>{{displayName }}</b> ({{email}}) 
+        <div class="clearfix"></div>
+          FCode: <select ng-model="fcodeSelection" ng-change="updateFcodeSelection(fcodeSelection)" ng-options="edit.fcode as edit.fcode for edit in edits | unique: 'fcode'">
+              <option value=''>All</option>
+          </select>
+          State: <select ng-model="stateSelection" ng-change="updateStateSelection(stateSelection)" ng-options="edit.state as edit.state for edit in edits | unique: 'state'">
+              <option value=''>All</option>
+          </select>
+          <button type="button" class="btn btn-default" ng-csv="exportCSV | orderBy: '-editDate' | filter: {fcode:fcodeSelection, state:stateSelection}" csv-header="getHeader()" filename="{{email}}_report.csv">Export CSV</button>
+      </div>
+      <div class="widget-body large no-padding">
+        <rd-loading ng-hide="edits"></rd-loading>
+        <div class="table-responsive" ng-show="edits">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Role</th> 
+                <th class="text-center">Perm ID</th>
+                <th>GNIS Name</th>
+                <th>Base Map</th>
+                <th>Edit Date</th>
+                <th>Edit Type</th>
+                <th>Status</th>
+                <th>Map Url</th>
+            </tr>
+            </thead>
+              <tbody>
+              <tr ng-repeat="edit in edits | orderBy: '-editDate' | filter: {fcode:fcodeSelection, state:stateSelection}"">
+                  <td>{{ edit.roleName }}</td>
+                  <td class="text-center">{{ edit.permID }}</td>
+                  <td>{{ edit.gnisName }}</td>
+                  <td>{{ edit.baseMap }}</td>
+                  <td>{{ edit.editDate | date : 'short' }}</td>
+                  <td>{{ edit.editType }}</td>
+                  <td>{{ edit.approved }}</td>
+                  <td><a target="_blank" href="{{appRoot}}?loc={{edit.coordinates}},17"><i class="fa fa-map"></i></a></td>
+              </tr>
+              </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="widget-footer">
+      </div>
+    </div>
+  </div>
+</div>
