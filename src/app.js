@@ -11,7 +11,9 @@ const version = require('./routes/version');
 
 const app = express();
 
-app.use(logger('short'));
+if (process.env.NODE_ENV !== 'test') {
+  app.use(logger('dev'));
+}
 app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -19,11 +21,9 @@ app.use(bodyParser.json());
 //Routes
 app.use('/api', api);
 app.use('/version', version);
-app.get('/', function (req, res) {
-  res.send('Hello World!');
-});
 
-
-app.listen(port, function () {
+app.listen(port, () => {
   console.log(`App listening on port ${port}!`);
 });
+
+module.exports = app;

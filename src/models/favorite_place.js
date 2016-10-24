@@ -1,9 +1,6 @@
 'use strict';
 
-const Knex = require('knex');
-const knexConfig = require('../../config/knexfile');
-
-const knex = Knex(knexConfig);
+const knex = require('../db/knex');
 
 module.exports = {
   createFavoritePlace: createFavoritePlace,
@@ -12,7 +9,6 @@ module.exports = {
 };
 
 function createFavoritePlace(favoritePlace) {
-  console.log(favoritePlace);
   return knex('favorite_places')
     .returning('*')
     .insert(favoritePlace)
@@ -31,6 +27,6 @@ function showFavoritePlaces(contactId) {
 		.select('*')
     .from('favorite_places')
     .where('contact_id', contactId)
-    .orderBy('created_at', 'ASC')
+    .orderBy('id', 'ASC')
     .debug(process.env['KNEX_DEBUG']);
 }

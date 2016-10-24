@@ -1,9 +1,6 @@
 'use strict';
 
-const Knex = require('knex');
-const knexConfig = require('../../config/knexfile');
-
-const knex = Knex(knexConfig);
+const knex = require('../db/knex');
 
 module.exports = {
   createContact: createContact,
@@ -46,7 +43,7 @@ function showAllContacts() {
 	return knex
 		.select('*')
     .from('contacts')
-    .orderBy('created_at', 'ASC')
+    .orderBy('id', 'ASC')
     .debug(process.env['KNEX_DEBUG']);
 }
 
